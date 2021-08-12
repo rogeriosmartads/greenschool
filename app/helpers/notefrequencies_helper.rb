@@ -1,0 +1,2 @@
+module NotefrequenciesHelper
+end

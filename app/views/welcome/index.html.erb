@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+  <head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <title>AppGreenschool </title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+
+  <style>
+
+  .menu-list a.is-active, .menu-list  a:hover { background:#3e4148!important; color:#44e15a!important; }
+  .menu-list  a.is-active .icon, .menu-list  a:hover .icon { color:#44e15a!important;  }
+  .menu-list  a .icon, .menu-list  a { color:#fff!important; margin-top:3px; }
+
+   .small { font-size:10px; }
+   .lineGreen { height:5px!important; position: absolute; background-color: #44e15a; margin-top:12px; z-index:1000000; }
+
+   body, html { font-family: 'Lato', sans-serif; background-color: #3e4148!important; width:100%; height:100%; } 
+
+    #app { height:100%; width:100%; }
+
+    #form { width:300px; margin:0 auto; padding:30px 20px 30px 20px; background:#fff; position:absolute; left:379px; top:380px;width:350px; height:300px; border-radius:5px; }
+
+
+    #logo { width:600px; margin:0 auto; position:absolute; left:250px; top:75px; height:300px; }
+
+
+   
+  </style> 
+  </head> 
+ 
+ 
+ 
+ 
+ <body>
+  
+ 
+  <p id="notice"><%= notice %></p>  
+  
+<div class="container">
+<% if ! user_signed_in? %>
+   <div id="logo"> <%= image_tag "logopeq.png", class: "" %> </div>
+    <div id='app'>
+     <div id="form">  
+
+  <!-- Right side -->
+  <div class="level-right">
+    <%= search_form_for @q do |f| %>
+    <class="level-item"><a>
+    <%= f.label :'Matrícula'%>
+    <%= f.search_field :code_cont , :class => 'input' ,'required' => 'true','data-minlength'=>'4', 
+   'data-error' => "Ops. Preencher com 4 dígitos."%></a>
+    </br>
+    <class="level-item"><a>
+    <%= f.label :'Data Nascimento' %>
+    <%= f.search_field :datebirthday_date_equals,{:class => 'input','required' => 'true','data-minlength'=>'10', 
+   'data-error' => "Ops. Data inválida.",:data => {:mask=> '99/99/9999'}} %></a>
+     </br>
+     </br>
+    <class="level-item"><a>
+    <%= f.label :'Ano para pesquisa: ' %> 
+ <%= f.select :code_eq,options_for_select([['2018',7],['2019',8],['2020',9],['2021',10],['2022',11]], 10),{}, { :class => 'span3 controls controls-row' } %> </a>  
+     </br>
+     
+  <p class="control">
+    <%= f.submit 'Buscar', :class => 'button is-primary' %>    
+  </p> 
+
+  <%@statusapp=Statusapp.last%>
+  <%if @statusapp.name=="Manutenção"%>
+   <%="Atenção em #{@statusapp.name}"%>
+  <%end%> 
+     <% end %> 
+ <%end%>
+  </div>
+</div> 
+</div>
+</div> 
+
+
+
+
+
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.10/jquery.mask.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>

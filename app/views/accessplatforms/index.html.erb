@@ -1,0 +1,68 @@
+
+<%- model_class = Accessplatform -%>
+
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Accessplatforms</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/welcome/index?other=clique">Dashboard</a></li>
+                            <li class="active"><a href="/accessplatforms">Accessplatforms</a></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Listagem de todos os acessos plataforma.</h3>
+                            <% if Accessplatform.count==1 %> 
+                             <p class="text-muted m-b-30"><%=Accessplatform.count%> registro</p>
+                            <% else %> 
+                             <p class="text-muted m-b-30"><%=Discipline.count%> registros</p>
+                            <% end %> 
+                            
+                          
+                                
+                                
+                                
+                            
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                  <th><%= sort_link(@q, :pdate, model_class.human_attribute_name(:pdate), default_order: :asc)%></th>
+                                  <th>Accessok</th>
+                                  <th>Accesserror</th>    
+                                   <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <% @accessplatforms.each do |accessplatform| %>
+                                  <tr>
+                                  <td><%= accessplatform.pdate %></td>
+                                  <td><%= accessplatform.accessok%></td>
+                                  <td><%= accessplatform.accesserror%></td>
+                          
+                                   <td>
+                                  <%= link_to t('.show', :default => t("helpers.links.show")),
+                                   accessplatform_path(accessplatform), :class => 'btn btn-default btn-sm' %>
+     
+                                   </td>
+                                  </tr>
+                                  <div id="current_accessplatforms"> </div>
+                                <% end %>
+                              </tbody>
+                            </table>
+                            
+                    </div>
+                </div>
+            </div>
+         </div>   
+                
+<%= will_paginate @accessplatforms %>
+
+
+
+

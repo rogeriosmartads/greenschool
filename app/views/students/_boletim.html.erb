@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <meta charset = "utf-8">
+      <meta name = "viewport" content = "width = device-width, initial-scale = 1">
+      <title>BOLETIM DE ACOMPANHAMENTO ESCOLAR </title>
+      <link rel = "stylesheet" href = "https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.1/css/bulma.min.css">
+      <script src = "https://use.fontawesome.com/releases/v5.1.0/js/all.js"></script>
+   </head>
+   <body>
+       
+<style type="text/css">      
+@media print{
+    .no-print{
+      display: none;    
+    }
+}   
+</style>
+
+<%- model_class = Student -%>
+<div class="card">
+    <div class="media">
+      <div class="media-left">
+       <div id="logo"> <%= image_tag "logocemac.jpg", class: "" %> </div>
+      </div>
+       <div class="media-content">
+        <p class="has-text-centered">Centro Educacional Mariza Curvelo</p>
+        <p class="has-text-centered">Rua da Igualdade, 57 e 70 - Centro - Macaé, RJ Tels:(22) 2762-0595/2762-1395</p>
+        <p class="has-text-centered">www.cemacmacae.com.br</p>
+        <p class="has-text-centered">BOLETIM DE ACOMPANHAMENTO ESCOLAR</p>
+        </div>
+      </div>    
+</div>       
+       
+                            <div class="form-inline padding-bottom-15 no-print">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                        <a href="/welcome/index?other=clique">Novo_Aluno</a>
+                                        <%= link_to "Imprimir", "#", onclick: "printPage()" %>
+                                        </div>
+                                    </div>
+                                </div>
+      
+        <p class="has-text">Matrícula: <%=@student[0].code%> Turma: <%=@team[0].description%> Data: <%= Time.now.strftime("%d/%m/%Y") %></p>
+        <p class="has-text">Aluno(a):  <%=@student[0].name%> Ano: <%=@team[0].year%></p>             
+        <table class = "table is-bordered">
+    <thead>
+        <tr>
+            <th>Disciplinas</th>
+            <th>1 º Bimestre</br>Nota<strong>|</strong>Rec<strong>|</strong>Falta</th>
+            <th>2 º Bimestre</br>Nota<strong>|</strong>Rec<strong>|</strong>Falta</th>
+            <th>3 º Bimestre</br>Nota<strong>|</strong>Rec<strong>|</strong>Falta</th>
+            <th>4 º Bimestre</br>Nota<strong>|</strong>Rec<strong>|</strong>Falta</th>
+            <th>Média</th>
+            <th>Rec Final</th>
+            <th>Conc Final</th>
+            <th>Total Faltas</th>
+            <th>Resultado</th>
+        </tr>
+    </thead>
+    <tbody>
+       <%  @notefrequencies.each do |notefrequency| %>
+          <tr><td><%=notefrequency.disc_desc %></td> 
+              <td><%=notefrequency.f1bnota %> <strong>|</strong> <%=notefrequency.f1brec %> <strong>|</strong> <%=notefrequency.f1bfreq%> </td>
+              <td><%=notefrequency.f2bnota %> <strong>|</strong> <%=notefrequency.f2brec %> <strong>|</strong> <%=notefrequency.f2bfreq%> </td>
+              <td><%=notefrequency.f3bnota %> <strong>|</strong> <%=notefrequency.f3brec %> <strong>|</strong> <%=notefrequency.f3bfreq%> </td>
+              <td><%=notefrequency.f4bnota %> <strong>|</strong> <%=notefrequency.f4brec %> <strong>|</strong> <%=notefrequency.f4bfreq%> </td>
+              <td><%=notefrequency.media %> </td>
+              <td><%=notefrequency.recfinal %> </td>
+              <td><%=notefrequency.concfinal %> </td>
+              <td><%=notefrequency.totfreq %> </td>
+              <td><%=notefrequency.resultado %></td>
+         </tr>
+       <% end %>
+    </tbody>
+            </table>
+     
+   </body>
+</html>
+
+<script>      
+function printPage() {
+var css = '@page { size: landscape; }',
+    head = document.head || document.getElementsByTagName('head')[0],
+    style = document.createElement('style');
+
+style.type = 'text/css';
+style.media = 'print';
+
+if (style.styleSheet){
+  style.styleSheet.cssText = css;
+} else {
+  style.appendChild(document.createTextNode(css));
+}
+
+head.appendChild(style);
+
+window.print();
+}   
+</script>

@@ -1,0 +1,50 @@
+<%= yield :head %>
+  
+<%= form_for @user, :html => { :class => "form-horizontal form-bordered", 'data-toggle' => "validator" } do |f| %>
+<div class="container is-widescreen">
+  <div class="notification">
+<label class="label">DADOS GERAIS</label>    
+
+</br>
+  <label class="label"><%= f.label :email %></label>
+  <div class ='form-control'>
+   <%= f.text_field :email, :class => 'input' ,'required' => 'true','data-minlength'=>'3', 
+   'data-error' => "Ops. Email inválido ou muito pequeno. " %>
+  </div>
+  </br> 
+  <label class="label"><%= f.label :password %></label>
+  <div class ='form-control'>
+   <%= f.password_field :password, :class => 'form-control' %>
+  </div>
+  </br>    
+  <label class="label"><%=f.label :admin%></label>
+  <div class="form-control">
+     <%= f.select(:admin, User.admins.keys.map {|admin| [admin.titleize,admin]},{include_blank: false}, :class => 'form-control' )%>
+    </br>
+  </div> 
+ </br>  
+ <label class="label"><%= f.label :kind_id  %></label>
+ <div class ='form-control'>
+  <%= f.collection_select(:kind_id, @kinds, :id, :name, {include_blank: true}, { :class => 'form-control' })%>
+ </div>  
+
+<div class="field is-grouped">
+  <p class="control">
+    <%= f.submit nil, :class => 'button is-primary' %>    
+  </p>
+  <p class="control">
+    <a href="/users" class="button is-info">
+      Cancel
+    </a>
+  </p>
+</div>
+  
+  
+  
+  
+  
+  
+  </div>
+</div>
+<% end %>
+

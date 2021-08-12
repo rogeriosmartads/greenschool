@@ -1,0 +1,84 @@
+
+<%- model_class = Discipline -%>
+
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Disciplines</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/welcome/index?other=clique">Dashboard</a></li>
+                            <li class="active"><a href="/disciplines">Disciplines</a></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Listagem de todos as disciplinas da plataforma.</h3>
+                            <% if Discipline.count==1 %> 
+                             <p class="text-muted m-b-30"><%=Discipline.count%> registro</p>
+                            <% else %> 
+                             <p class="text-muted m-b-30"><%=Discipline.count%> registros</p>
+                            <% end %> 
+                            
+                            <div class="form-inline padding-bottom-15">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <%= link_to t('.new', :default => t("helpers.links.new")),
+                                            new_discipline_path,
+                                            :class => 'btn btn-primary btn-sm' %>    
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                            
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                  <th><%= sort_link(@q, :description, model_class.human_attribute_name(:description), default_order: :asc)%></th>
+                                  <th>Abreviatura</th>
+                                  <th>Status</th>    
+                                   <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <% @disciplines.each do |discipline| %>
+                                  <tr>
+                                  <td><%= discipline.description %></td>
+                                  <td><%= discipline.abrev%></td>
+                                  <td><%= discipline.status%></td>
+                          
+                                   <td>
+                                  <%= link_to t('.show', :default => t("helpers.links.show")),
+                                   discipline_path(discipline), :class => 'btn btn-default btn-sm' %>
+     
+                                   </td>
+                                  </tr>
+                                  <div id="current_discipline"> </div>
+                                <% end %>
+                              </tbody>
+                            </table>
+                            
+                    </div>
+                </div>
+            </div>
+         </div>   
+                
+<%= will_paginate @disciplines %>
+
+
+
+
+<div>
+	<h4> Import that data! </h4>
+		<%= form_tag import_disciplines_path, multipart: true do %>
+		<%= file_field_tag :file %>
+		<%= submit_tag "Import CSV" %>
+		<% end %> 
+</div>

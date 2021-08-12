@@ -1,0 +1,69 @@
+
+<%= yield :head %>
+  <%= render :partial => "teams/topform" %>
+<%= form_for @team, :html => { :class => "form-horizontal form-bordered", 'data-toggle' => "validator" } do |f| %>
+<div class="container is-widescreen">
+  <div class="notification">
+<label class="label">DADOS GERAIS</label>    
+
+</br>
+  <label class="label"><%= f.label :description  %></label>
+  <div class ='form-control'>
+   <%= f.text_field :description, :class => 'form-control' %>
+  </div>
+
+  <label class="label"><%= f.label :year  %></label>
+  <div class ='form-control'>
+   <%= f.select(:year, Team.years.keys.map {|year| [year.titleize,year]}, :class => 'form-control' )%>
+  </div>
+  
+
+  <label class="label"><%= f.label :kind  %></label>
+  <div class ='form-control'>
+   <%= f.select(:kind, Team.kinds.keys.map {|kind| [kind.titleize,kind]}, :class => 'form-control' )%>
+  </div>  
+  
+  <label class="label"><%= f.label :status  %></label>
+  <div class ='form-control'>
+   <%= f.select(:status, Team.statuses.keys.map {|status| [status.titleize,status]}, :class => 'form-control' )%>
+  </div>   
+  
+  <label class="label"><%= f.label :pesqstatus  %></label>
+  <div class ='form-control'>
+   <%= f.select(:pesqstatus, Team.pesqstatuses.keys.map {|pesqstatus| [pesqstatus.titleize,pesqstatus]}, :class => 'form-control' )%>
+  </div>     
+  
+  <label class="label"><%= f.label :idfb  %></label>
+  <div class ='form-control'>
+   <%= f.text_field :idfb, :class => 'form-control' %>
+  </div>
+  
+
+</br>
+
+
+
+
+<div class="field is-grouped">
+  <p class="control">
+    <%= f.submit nil, :class => 'button is-primary' %>    
+  </p>
+  <p class="control">
+    <a href="/teams" class="button is-info">
+      Cancel
+    </a>
+  </p>
+</div>
+
+  </div>
+</div>
+<% end %>
+
+
+
+
+
+
+
+
+

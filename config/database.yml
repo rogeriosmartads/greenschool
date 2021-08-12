@@ -1,0 +1,32 @@
+
+development:
+  adapter: postgresql
+  encoding: unicode
+  #host: db
+  host: <%= ENV.fetch("HOST_DB") %>
+  username: <%= ENV.fetch("POSTGRES_USER") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: appgreenschool_development
+
+test:
+  adapter: postgresql
+  encoding: unicode
+  #host: db
+  host: <%= ENV.fetch("HOST_DB") %>
+  username: <%= ENV.fetch("POSTGRES_USER") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: appgreenschool_test
+  
+production:
+  adapter: postgresql
+  encoding: unicode
+  #host: db
+  host: <%= ENV.fetch("HOST_DB") %>
+  username: <%= ENV.fetch("POSTGRES_USER") %>
+  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  database: appgreenschool_production
+  #username: appgreenschool
+  #password: <%= ENV['ROR_DATABASE_PASSWORD'] %>

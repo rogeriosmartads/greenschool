@@ -1,0 +1,104 @@
+
+<%- model_class = Registration -%>
+
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Registrations</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/welcome/index?other=clique">Dashboard</a></li>
+                            <li class="active"><a href="/registrations">Registrations</a></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                
+ <!-- Left side -->
+  <div class="level-left">
+ <p class="level-item">  
+ 
+  <%= search_form_for @q do |f| %> 
+   <%= f.label :year_eq %>
+   <%= f.select :year_eq, Registration.years.to_a.map { |w| [w[0].humanize, w[1]] },{:include_blank=> "Selecione o Ano"} %> 
+   <%= f.submit %>   
+ <%end%>  
+ </div>                 
+                
+                
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Listagem de todos as Matriculas da plataforma.</h3>
+                            <% if @registrations.count==1 %> 
+                             <p class="text-muted m-b-30"><%=@registrations.count%> registro</p>
+                            <% else %> 
+                             <p class="text-muted m-b-30"><%=@registrations.count%> registros</p>
+                            <% end %> 
+                            
+
+                                
+                                
+                                
+                            
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                  <th>Code</th>
+                                  <th>Name</th>
+                                  <th>Description</th>
+                                  <th>year</th>
+                                  <th>status</th>   
+                                   <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <% @registrations.each do |registration| %>
+                                  <tr>
+                                 <td><%= registration.student.code %></td>
+                                 <td><%= registration.student.name %></td>
+                                 <td><%= registration.team.description %></td>
+                                 <td><%= registration.year %></td>
+                                 <td><%= registration.status %></td>
+                          
+                                    <td>
+                                    <%= link_to t('.show', :default => t("helpers.links.show")),
+                                   registration_path(registration), :class => 'btn btn-default btn-sm' %>
+                                       
+                                    </td>
+                                  </tr>
+                                  <div id="current_registration"> </div>
+                                <% end %>
+                              </tbody>
+                            </table>
+                            
+                    </div>
+                </div>
+            </div>
+         </div>   
+                
+<%= will_paginate @registrations %>
+
+
+
+
+<div>
+	<h4> Import that data! </h4>
+		<%= form_tag import_registrations_path, multipart: true do %>
+		<%= file_field_tag :file %>
+		<%= text_field_tag :tyear %>
+		<%= submit_tag "Import CSV" %>
+		<% end %> 
+</div>
+
+
+
+
+
+
+
+
+
+
+

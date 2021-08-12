@@ -1,0 +1,2 @@
+class Accessplatform < ApplicationRecord
+end

@@ -1,0 +1,110 @@
+
+<%- model_class = Team -%>
+
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Disciplines</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/welcome/index?other=clique">Dashboard</a></li>
+                            <li class="active"><a href="/disciplines">Teams</a></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+ <!-- Left side -->
+  <div class="level-left">
+ <p class="level-item">
+      
+  <%= search_form_for @q do |f| %> 
+   <%= f.label :year_eq %>
+   <%= f.select :year_eq, Team.years.to_a.map { |w| [w[0].humanize, w[1]] },{:include_blank=> "Selecione o Ano"} %> 
+   <%= f.submit %>   
+ <%end%>  
+ </div>                
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Listagem de todos as turmas da plataforma.</h3>
+                            <% if @teams.count==1 %> 
+                             <p class="text-muted m-b-30"><%=@teams.count%> registro</p>
+                            <% else %> 
+                             <p class="text-muted m-b-30"><%=@teams.count%> registros</p>
+                            <% end %> 
+                            
+
+                                
+                        
+                            
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                 <th><%= sort_link(@q, :description, model_class.human_attribute_name(:description), default_order: :asc)%></th>
+                                 <th><%= sort_link(@q, :year, model_class.human_attribute_name(:year), default_order: :asc)%></th>
+                                 <th><%= sort_link(@q, :status, model_class.human_attribute_name(:status), default_order: :asc)%></th>  
+                                 <th><%= sort_link(@q, :pesqstatus, model_class.human_attribute_name(:pesqstatus), default_order: :asc)%></th> 
+                                   <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                  <% @teams.each do |team| %>
+                                  <tr>
+                                  <td><%= team.description %></td>
+                                  <td><%= team.year%></td>
+                                  <td><%= team.status%></td>
+                                  <td><%= team.pesqstatus%></td>
+                                   <td>
+                                  <%= link_to t('.show', :default => t("helpers.links.show")),
+                                   team_path(team), :class => 'btn btn-default btn-sm' %>
+                                  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+                                   edit_team_path(team), :class => 'btn btn-default btn-sm' %> 
+                                  <%= link_to t('.altpesqstatus', :default => t("helpers.links.altpesqstatus")),
+                                   teams_altpesqstatus_path(team), :class => 'btn btn-default btn-sm' %>  
+     
+                                   </td>
+                                  </tr>
+                                  <div id="current_team"> </div>
+                                <% end %>
+                              </tbody>
+                            </table>
+                            
+                    </div>
+                </div>
+            </div>
+         </div>   
+                
+<%= will_paginate @teams %>
+
+
+
+
+<div>
+	<h4> Import that data! </h4>
+		<%= form_tag import_teams_path, multipart: true do %>
+		<%= file_field_tag :file  %>
+		<%= text_field_tag :tyear %>
+		<%= submit_tag "Import CSV" %>
+		<% end %> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,94 @@
+
+<%- model_class = Student -%>
+
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Students</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/welcome/index?other=clique">Dashboard</a></li>
+                            <li class="active"><a href="/students">Students</a></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Listagem de todos as Estudantes da plataforma.</h3>
+                            <% if Student.count==1 %> 
+                             <p class="text-muted m-b-30"><%=Student.count%> registro</p>
+                            <% else %> 
+                             <p class="text-muted m-b-30"><%=Student.count%> registros</p>
+                            <% end %> 
+                            
+                            <div class="form-inline padding-bottom-15">
+                                    <div class="row">
+                                        <div class="col-sm-6">
+                                            <%= link_to t('.new', :default => t("helpers.links.new")),
+                                            new_student_path,
+                                            :class => 'btn btn-primary btn-sm' %>    
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                            
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                  <th>Name</th>
+                                  <th>Code</th>
+                                  <th>Datebirthday</th>
+                      
+                                   <th><%=t '.actions', :default => t("helpers.actions") %></th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <% @students.each do |student| %>
+                                  <tr>
+                                  <td><%= student.name %></td>
+                                  <td><%= student.code %></td>
+                                  <td><%= student.datebirthday %></td>
+                              
+                          
+                                    <td>
+                                   <%= link_to t('.show', :default => t("helpers.links.show")),
+                                   student_path(student), :class => 'btn btn-default btn-sm' %>
+                                       
+                                    </td>
+                                  </tr>
+                                  <div id="current_student"> </div>
+                                <% end %>
+                              </tbody>
+                            </table>
+                            
+                    </div>
+                </div>
+            </div>
+         </div>   
+                
+<%= will_paginate @students %>
+
+
+
+
+<div>
+	<h4> Import that data! </h4>
+		<%= form_tag import_students_path, multipart: true do %>
+		<%= file_field_tag :file %>
+		<%= submit_tag "Import CSV" %>
+		<% end %> 
+</div>
+
+
+
+
+
+
+
+

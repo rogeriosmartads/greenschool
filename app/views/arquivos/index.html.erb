@@ -1,0 +1,40 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.css" rel="stylesheet"/>
+  
+  
+  <button class="toggle-modal">Open Modal</button>
+  <div class="modal" id="modal">
+    <div class="modal-background"></div>
+    <div class="modal-card">
+      <header class="modal-card-head">
+        <p class="modal-card-title">Modal title</p>
+        <button class="delete toggle-modal"></button>
+      </header>
+      <section class="modal-card-body">
+        <!-- Content ... -->
+        
+        
+        		        <%= form_tag({ action: :upload_arquivo }, { :multipart => true }) do |f| %>
+		        	<%= file_field_tag 'arquivo[]', :multiple => true %>
+				      <div class="modal-footer">
+				        <%= submit_tag 'Anexar', class: "btn btn-primary", data: { disable_with: "Anexando..." } %>
+				      </div>
+		        <% end %>
+        
+      </section>
+      <footer class="modal-card-foot">
+		
+      </footer>
+    </div>
+  </div>
+  
+<script> 
+ var modal = document.getElementById('modal');
+  var elements = document.getElementsByClassName('toggle-modal');
+  for (var i = 0; i < elements.length; i++) {
+    elements[i].addEventListener('click', toggleClass);
+  }
+
+  function toggleClass() {
+    modal.classList.toggle('is-active');
+  }  
+</script> 

@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Student:</strong>
+  <%= @registration.student.idfb %>
+</p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @registration.team.idfb %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @registration.year %>
+</p>
+
+<p>
+  <strong>Idfb:</strong>
+  <%= @registration.idfb %>
+</p>
+
+<%= link_to 'Edit', edit_registration_path(@registration) %> |
+<%= link_to 'Back', registrations_path %>

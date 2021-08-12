@@ -1,0 +1,27 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Statusapps</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @statusapps.each do |statusapp| %>
+      <tr>
+        <td><%= statusapp.name %></td>
+        <td><%= link_to 'Show', statusapp %></td>
+        <td><%= link_to 'Edit', edit_statusapp_path(statusapp) %></td>
+        <td><%= link_to 'Destroy', statusapp, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Statusapp', new_statusapp_path %>

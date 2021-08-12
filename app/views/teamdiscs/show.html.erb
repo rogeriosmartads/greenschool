@@ -1,0 +1,28 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Team:</strong>
+  <%= @teamdisc.team.id %></br>
+  <%= @teamdisc.team.description %>
+</p>
+
+
+
+<p>
+  <strong>Discipline:</strong>
+  <%= @teamdisc.discipline.id %></br>
+  <%= @teamdisc.discipline.description %>
+</p>
+
+<p>
+  <strong>Id:</strong>
+  <%= @teamdisc.id %>
+</p>
+
+<p>
+  <strong>Indice:</strong>
+  <%= @teamdisc.indice %>
+</p>
+
+<%= link_to 'Edit', edit_teamdisc_path(@teamdisc) %> |
+<%= link_to 'Back', teamdiscs_path %>

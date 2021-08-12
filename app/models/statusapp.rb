@@ -1,0 +1,2 @@
+class Statusapp < ApplicationRecord
+end

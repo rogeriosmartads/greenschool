@@ -1,0 +1,41 @@
+
+<%= yield :head %>
+<%= render :partial => "kinds/topform" %>
+<%= form_for @kind, :html => { :class => "form-horizontal form-bordered", 'data-toggle' => "validator" } do |f| %>
+<div class="container is-widescreen">
+<div class="notification">
+<label class="label">DADOS GERAIS</label>    
+
+</br>
+<label class="label"><%= f.label :name  %></label>
+<div class ='form-control'>
+ <%= f.text_field :name, :class => 'form-control' %>
+</div>
+
+<label class="label"><%= f.label :status  %></label>
+<div class ='form-control'>
+ <%= f.select(:status, Kind.statuses.keys.map {|status| [status.titleize,status]}, :class => 'form-control' )%>
+</div>   
+
+
+
+
+</br>
+
+
+
+
+<div class="field is-grouped">
+<p class="control">
+  <%= f.submit nil, :class => 'button is-primary' %>    
+</p>
+<p class="control">
+  <a href="/kinds" class="button is-info">
+    Cancel
+  </a>
+</p>
+</div>
+
+</div>
+</div>
+<% end %>

@@ -1,0 +1,152 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html lang="en">
+  <head>
+     <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>         
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type"/>
+    <meta charset="UTF-8"/>
+    <meta content="noindex" name="robots"/>
+    <title>AppGreenschool </title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.4.1/css/bulma.min.css" rel="stylesheet"></link>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"></link>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.7.2/css/bulma.min.css" rel="stylesheet"></link>
+
+    <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet">
+
+    <link rel="stylesheet" href="http://hilios.github.io/jQuery.countdown/css/syntax.css">
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha256-3edrmyuQ0w65f8gfBsqowzjJe2iM6n0nKciPUp8y+7E=" crossorigin="anonymous"></script>
+    <script defer="defer" src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script src="//cdn.rawgit.com/hilios/jQuery.countdown/2.2.0/dist/jquery.countdown.min.js"></script>
+ 
+ 
+
+  <style>
+
+  .menu-list a.is-active, .menu-list  a:hover { background:#3e4148!important; color:#44e15a!important; }
+  .menu-list  a.is-active .icon, .menu-list  a:hover .icon { color:#44e15a!important;  }
+  .menu-list  a .icon, .menu-list  a { color:#fff!important; margin-top:3px; }
+
+   .small { font-size:10px; }
+   .lineGreen { height:5px!important; position: absolute; background-color: #44e15a; margin-top:12px; z-index:1000000; }
+   .updateHeightColumn { background-color: #3e4148; width:350px;  }
+
+   .menu-list li { margin-top:10px; margin-bottom:10px;  }
+
+   body { font-family: 'Lato', sans-serif; }
+
+   .topo { margin-bottom:15px; height:40px;  }
+   .topo span { font-style: italic; font-weight: bold; }
+
+   .box-green { background:#44e15a!important; padding:20px 35px 35px 20px; border-radius:5px; } 
+   .box-green .icon { color:#fff!important; margin-top:5px; margin-bottom: 5px; }
+   .box-green p.numero { font-size:31px; color:#fff; font-weight: bold; }
+   .box-green p.legenda { font-size:15px; color:#fff; margin-top:5px!important; }
+
+   .menu-list li .icon { float:right; margin-top:-3px; }
+
+   h1,h2 { margin-top:25px; margin-bottom:25px; font-weight:normal; }
+   h1 { font-size:26px; }
+   h2 { font-size:24px; }
+
+
+
+
+   
+  </style>
+
+
+  </head>
+  <body>
+
+<% if user_signed_in? %>
+ <% if current_user.admin? %>
+    <div class="lineGreen"></div>
+    <div id='app'>
+      <section class='main-content columns is-fullheight'>
+        <aside class='column is-2 is-narrow-mobile is-fullheight section is-hidden-mobile updateHeightColumn' >
+
+          <p class='menu-label is-hidden-touch' style="text-align: center; ">
+              <%= image_tag "logopeq.png", class: "logo" %><br /><br /><br />
+          </p>
+          
+          <ul class='menu-list'>
+            <li> <a href= "/welcome/index"> <span class='icon'> <i class='fa fa-home'></i> </span> Dashboard </a> </li>
+            <li> <a href="/students"> <span class='icon'> <i class="fa fa-address-card" aria-hidden="true"></i> </span> Students </a> </li>
+            <li> <a href="/teams" > <span class='icon'> <i class="fa fa-users" aria-hidden="true"></i> </span> Teams </a> </li>
+            <li> <a href="/disciplines" > <span class='icon'> <i class="fa fa-users" aria-hidden="true"></i> </span> Disciplines </a> </li>
+            <li> <a href="/teamdiscs" > <span class='icon'> <i class="fa fa-users" aria-hidden="true"></i> </span> Teamdiscs </a> </li>
+            <li> <a href="/users" > <span class='icon'> <i class="fa fa-user-circle" aria-hidden="true"></i> </span> Users </a> </li>
+            <li> <a href="/registrations" > <span class='icon'> <i class="fa fa-user-circle" aria-hidden="true"></i> </span> Registration </a> </li>
+            <li> <a href="/kinds" > <span class='icon'> <i class="fa fa-user-circle" aria-hidden="true"></i> </span> Kinds </a> </li>
+            <li> <a href="<%= url_for(destroy_user_session_path) %>" data-method="delete"><span class='icon'><i class="fa fa-times" aria-hidden="true"></i> </span> Sair</a> </li>
+        
+          </ul>
+        </aside>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+      logopeq.png
+      </h1>
+      <%= link_to('Sair',destroy_user_session_path(), method: :delete) %>
+      <strong style="color: $000;"> Olá,</strong> <%= current_user.email.to_s %>
+     <%= yield %> 
+    </div>
+  </section>
+     
+
+
+
+    </div>   
+
+ <% else %> <!--Se está normal_user --> 
+  <section class="section">
+    <div class="container">
+      <h1 class="title">
+      AppGreenschool
+      </h1>
+      <%= link_to('Sair',destroy_user_session_path(), method: :delete) %>
+      <strong style="color: $000;"> Olá,</strong> <%= current_user.email.to_s %>
+       
+    </div>
+  </section> 
+ 
+   
+ 
+<% end %> 
+<% else %><!--Se está logado -->
+   <%= yield %> 
+   
+   
+<% end %>
+
+
+      <script>
+
+        function jqUpdateSize(){
+            // Get the dimensions of the viewport
+            var width = $(window).width();
+            var height = $(window).height()+$(window).scrollTop()+12;
+
+            //$('#jqWidth').html(width);
+            //$('#jqHeight').html(height);
+
+
+            $('.updateHeightColumn').css({ position: "relative", height:  height, overflow:" hidden"});
+            $('.lineGreen').css({  width:  width});
+
+        }
+        $(document).ready(jqUpdateSize);    // When the page first loads
+        $(window).resize(jqUpdateSize); 
+        $(window).scroll(jqUpdateSize); 
+
+
+    </script>
+
+  </body>
+</html>

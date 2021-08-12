@@ -1,0 +1,5 @@
+<% if current_user==nil %>
+  <%= render :partial => "boletim" %>
+<% elsif current_user!=nil%>
+    <%= render :partial => "indexadmin" %>
+<% end %>

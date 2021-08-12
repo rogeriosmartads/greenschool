@@ -1,0 +1,34 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @team.description %>
+</p>
+
+<p>
+  <strong>Year:</strong>
+  <%= @team.year %>
+</p>
+
+<p>
+  <strong>kind:</strong>
+  <%= @team.kind %>
+</p>
+
+<p>
+  <strong>Status:</strong>
+  <%= @team.status %>
+</p>
+
+<p>
+  <strong>pesqStatus:</strong>
+  <%= @team.pesqstatus %>
+</p>
+
+<p>
+  <strong>Idfb:</strong>
+  <%= @team.idfb %>
+</p>
+
+<%= link_to 'Edit', edit_team_path(@team) %> |
+<%= link_to 'Back', teams_path %>

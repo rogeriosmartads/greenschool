@@ -1,0 +1,111 @@
+<%= javascript_include_tag 'notefrequencies' %>
+<%- model_class = Notefrequency -%>
+
+
+                <div class="row bg-title">
+                    <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
+                        <h4 class="page-title">Notefrequencies</h4> </div>
+                    <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
+                        <ol class="breadcrumb">
+                            <li><a href="/welcome/index?other=clique">Dashboard</a></li>
+                            <li class="active"><a href="/teams">Teams</a></li>
+                        </ol>
+                    </div>
+                    <!-- /.col-lg-12 -->
+                </div>
+                <!-- /row -->
+ <!-- Left side -->
+ <!-- Left side -->
+  <div class="level-left">
+    <%= search_form_for @q do |f| %>
+    <%= f.label :year_eq %>
+    <%= f.select :year_eq, Notefrequency.years.to_a.map { |w| [w[0].humanize, w[0]] },{:include_blank=> "Selecione o Ano"} %> 
+    <class="level-item"><a><%= f.submit %></a>   
+     <% end %> 
+    
+    
+  </div>
+
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="white-box">
+                            <h3 class="box-title m-b-0">Listagem de todos as turmas da plataforma.</h3>
+                            <% if @teams.count==1 %> 
+                             <p class="text-muted m-b-30"><%=@teams.count%> registro</p>
+                            <% else %> 
+                             <p class="text-muted m-b-30"><%=@teams.count%> registros</p>
+                            <% end %> 
+                            <h3 class="box-title m-b-0">Listagem de todos as notas da plataforma.</h3>
+                            <% if @notefrequencies.count==1 %> 
+                             <p class="text-muted m-b-30"><%=@notefrequencies.count%> registro</p>
+                            <% else %> 
+                             <p class="text-muted m-b-30"><%=@notefrequencies.count%> registros</p>
+                            <% end %>                             
+
+                            <div class="table-responsive">
+                                <table id="myTable" class="table table-striped">
+                                <thead>
+                                  <tr>
+                                   <th>id</th>   
+                                  <th>Description</th>
+                                  <th>Year</th>
+                                   <th>Show</th>
+                                  </tr>
+                                </thead>
+                                <tbody>
+                                <% @teams.each do |team| %>
+                                  <tr>
+                                 <td><%= team.id %></td>     
+                                 <td><%= team.description %></td>
+                                 <td><%= team.year %></td>
+                          
+                                    <td>
+                                   <%= link_to t('.show', :default => t("helpers.links.show")),
+                                   notefrequencies_indexstudent_path(team), :class => 'btn btn-default btn-sm' %>
+                                       
+                                    </td>
+                                  </tr>
+                                  <div id="current_registration"> </div>
+                                <% end %>
+                              </tbody>
+                            </table>
+                            
+                    </div>
+                </div>
+            </div>
+         </div>   
+                
+
+<%= will_paginate @notefrequencies %>
+
+               
+                
+                
+  
+                
+
+
+
+<div>
+	<h4> Import that data! </h4>
+		<%= form_tag import_notefrequencies_path, multipart: true do %>
+		<%= file_field_tag :file %>
+		<%= submit_tag "Import CSV" %>
+		<% end %> 
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

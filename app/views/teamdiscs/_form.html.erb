@@ -1,0 +1,49 @@
+
+<%= yield :head %>
+  <%= render :partial => "teamdiscs/topform" %>
+<%= form_for @teamdisc, :html => { :class => "form-horizontal form-bordered", 'data-toggle' => "validator" } do |f| %>
+<div class="container is-widescreen">
+  <div class="notification">
+<label class="label">DADOS GERAIS</label>    
+
+</br>
+
+
+  <label class="label"><%= f.label :team_id  %></label>
+  <div class ='form-control'>
+   <%= f.collection_select(:team_id, @teams, :id, :description, {include_blank: true}, { :class => 'form-control' })%>
+  </div>
+  
+
+  <label class="label"><%= f.label :discipline_id  %></label>
+  <div class ='form-control'>
+   <%= f.collection_select(:discipline_id, @disciplines, :id, :description, {include_blank: true}, { :class => 'form-control' })%>
+  </div>  
+  
+  <label class="label"><%= f.label :indice  %></label>
+  <div class ='form-control'>
+   <%= f.text_field :indice, :class => 'form-control' %>
+  </div>
+  
+
+</br>
+
+
+
+
+<div class="field is-grouped">
+  <p class="control">
+    <%= f.submit nil, :class => 'button is-primary' %>    
+  </p>
+  <p class="control">
+    <a href="/teamdiscs" class="button is-info">
+      Cancel
+    </a>
+  </p>
+</div>
+
+  </div>
+</div>
+<% end %>
+
+
