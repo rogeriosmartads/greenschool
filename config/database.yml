@@ -22,11 +22,8 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  #host: db
-  host: <%= ENV.fetch("HOST_DB") %>
-  username: <%= ENV.fetch("POSTGRES_USER") %>
-  password: <%= ENV.fetch("POSTGRES_PASSWORD") %>
-  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  pool: 5
+  username: <%= Rails.application.credentials.dig(:database, :user) %>
+  password: <%= Rails.application.credentials.dig(:database, :pass) %>
+  host: <%= Rails.application.credentials.dig(:database, :host) %>  
   database: greenschool_production
-  #username: greenschool
-  #password: <%= ENV['ROR_DATABASE_PASSWORD'] %>
